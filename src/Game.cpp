@@ -7,7 +7,7 @@ Game::Game(const char* title, int gridSize, int columns, int rows) : gridSize(gr
   isRunning = true;
   window = nullptr;
   renderer = nullptr;
-  food = new Food(gridSize, columns / 2, rows / 2);
+  food = new Food(gridSize, columns, rows);
 
   if (SDL_Init(SDL_INIT_VIDEO) == false)
   {
