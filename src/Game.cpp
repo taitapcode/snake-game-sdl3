@@ -1,28 +1,33 @@
 #include <SDL3/SDL.h>
-#include <iostream>
 #include "Game.hpp"
 
-Game::Game(const char* title, int width, int height) : isRunning(true), window(nullptr), renderer(nullptr)
+Game::Game(const char* title, int gridSize, int columns, int rows) : gridSize(gridSize), columns(columns), rows(rows)
 {
-  if (!SDL_Init(SDL_INIT_VIDEO))
+  windowWidth = gridSize * columns;
+  windowHeight = gridSize * rows;
+  isRunning = true;
+  window = nullptr;
+  renderer = nullptr;
+
+  if (SDL_Init(SDL_INIT_VIDEO) == false)
   {
-    std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
+    SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
     isRunning = false;
     return;
   }
 
-  window = SDL_CreateWindow(title, width, height, 0);
-  if (!window)
+  window = SDL_CreateWindow(title, windowWidth, windowHeight, 0);
+  if (window == nullptr)
   {
-    std::cerr << "Failed to create window: " << SDL_GetError() << std::endl;
+    SDL_Log("Failed to create window: %s", SDL_GetError());
     isRunning = false;
     return;
   }
 
   renderer = SDL_CreateRenderer(window, NULL);
-  if (!renderer)
+  if (renderer == nullptr)
   {
-    std::cerr << "Failed to create renderer: " << SDL_GetError() << std::endl;
+    SDL_Log("Failed to create renderer: %s", SDL_GetError());
     isRunning = false;
     return;
   }
@@ -48,9 +53,14 @@ void Game::processInput()
   SDL_Event event;
   while (SDL_PollEvent(&event))
   {
-    if (event.type == SDL_EVENT_QUIT)
+    switch (event.type)
     {
-      isRunning = false;
+      case SDL_EVENT_QUIT:
+        isRunning = false;
+        break;
+
+      default:
+        break;
     }
   }
 }
@@ -64,7 +74,7 @@ void Game::render()
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
-
+  drawGrid();
 
   SDL_RenderPresent(renderer);
 }
@@ -76,3 +86,18 @@ void Game::clean()
   SDL_Quit();
 }
 
+void Game::drawGrid()
+{
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  for (int i = 0; i <= columns; ++i)
+  {
+    int x = i * gridSize;
+    SDL_RenderLine(renderer, x, 0, x, windowHeight);
+  }
+
+  for(int i = 0; i <= rows; ++i)
+  {
+    int y = i * gridSize;
+    SDL_RenderLine(renderer, 0, y, windowWidth, y);
+  }
+}
