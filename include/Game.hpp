@@ -1,6 +1,6 @@
 #pragma once
-
 #include <SDL3/SDL.h>
+#include "Food.hpp"
 
 class Game
 {
@@ -17,6 +17,7 @@ private:
   int windowWidth, windowHeight;
   SDL_Window* window;
   SDL_Renderer* renderer;
+  Food* food;
 
   void processInput();
   void update();

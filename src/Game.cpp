@@ -1,5 +1,6 @@
 #include <SDL3/SDL.h>
 #include "Game.hpp"
+#include "Food.hpp"
 
 Game::Game(const char* title, int gridSize, int columns, int rows) : gridSize(gridSize), columns(columns), rows(rows)
 {
@@ -8,6 +9,7 @@ Game::Game(const char* title, int gridSize, int columns, int rows) : gridSize(gr
   isRunning = true;
   window = nullptr;
   renderer = nullptr;
+  food = new Food(gridSize, columns / 2, rows / 2);
 
   if (SDL_Init(SDL_INIT_VIDEO) == false)
   {
@@ -74,6 +76,7 @@ void Game::render()
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
+  food->draw(renderer);
   drawGrid();
 
   SDL_RenderPresent(renderer);
@@ -81,6 +84,8 @@ void Game::render()
 
 void Game::clean()
 {
+  delete food;
+
   if (renderer) SDL_DestroyRenderer(renderer);
   if (window) SDL_DestroyWindow(window);
   SDL_Quit();
