@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-  Game *game = new Game("Snake SDL3", 60, 15, 15);
+  Game* game = new Game("Snake SDL3", 60, 15, 15);
   game->run();
 
   delete game;
