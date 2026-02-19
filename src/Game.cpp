@@ -1,6 +1,4 @@
-#include <SDL3/SDL.h>
 #include "Game.hpp"
-#include "Food.hpp"
 
 Game::Game(const char* title, int gridSize, int columns, int rows) : gridSize(gridSize), columns(columns), rows(rows)
 {
