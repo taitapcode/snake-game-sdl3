@@ -13,13 +13,9 @@ Snake::~Snake()
 
 void Snake::draw(SDL_Renderer* renderer)
 {
-  for (const Vector2 &segment : body) {
-    SDL_FRect rect = {
-      segment.x * size * 1.0f,
-      segment.y * size * 1.0f,
-      size * 1.0f,
-      size * 1.0f
-    };
+  for (const Vector2 &segment : body)
+  {
+    SDL_FRect rect = { segment.x * size * 1.0f, segment.y * size * 1.0f, size * 1.0f, size * 1.0f };
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_RenderFillRect(renderer, &rect);

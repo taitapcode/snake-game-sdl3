@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-Game::Game(const char* title, int size, Vector2 range)
+Game::Game(const char* title, int size, Vector2 range, int tps) : tps(tps)
 {
   isRunning = true;
   window = nullptr;
@@ -44,7 +44,14 @@ void Game::run()
   while (isRunning)
   {
     processInput();
-    update();
+
+    Uint64 currentTime = SDL_GetTicks();
+    if (currentTime - lastTickTime >= 1000 / tps)
+    {
+      update();
+      lastTickTime = currentTime;
+    }
+
     render();
   }
 }

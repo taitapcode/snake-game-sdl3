@@ -8,7 +8,7 @@
 class Game
 {
 public:
-  Game(const char *title, int size, Vector2 range);
+  Game(const char *title, int size, Vector2 range, int tps = 10);
   ~Game();
 
   void run();
@@ -21,6 +21,9 @@ private:
   Grid* grid;
   Snake* snake;
   Food* food;
+
+  int tps;
+  Uint64 lastTickTime = 0;
 
   void processInput();
   void update();
