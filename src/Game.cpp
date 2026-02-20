@@ -90,7 +90,13 @@ void Game::processInput()
 
 void Game::update()
 {
-  snake->move();
+  bool grow = snake->getHead() == food->getPos();
+  if (grow)
+  {
+    do food->random();
+    while (snake->checkCollision(food->getPos()));
+  }
+  snake->move(grow);
 }
 
 void Game::render()

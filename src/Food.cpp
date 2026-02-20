@@ -26,3 +26,8 @@ void Food::draw(SDL_Renderer* renderer)
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderFillRect(renderer, &rect);
 }
+
+Vector2 Food::getPos() const
+{
+  return pos;
+}

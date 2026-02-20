@@ -7,6 +7,7 @@ public:
   Food(int size, Vector2 range);
   ~Food();
 
-  void draw(SDL_Renderer* renderer) override;
+  Vector2 getPos() const;
   void random();
+  void draw(SDL_Renderer* renderer) override;
 };

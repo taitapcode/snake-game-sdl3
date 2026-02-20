@@ -17,8 +17,10 @@ public:
   Snake(int size, Vector2 range);
   ~Snake();
 
-  void move();
+  void move(bool grow);
   void changeDirection(Direction newDir);
+  Vector2 getHead() const;
+  bool checkCollision(const Vector2& pos) const;
   void draw(SDL_Renderer* renderer) override;
 
 private:

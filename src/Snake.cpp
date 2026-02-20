@@ -11,21 +11,21 @@ Snake::~Snake()
   body.clear();
 }
 
-void Snake::move()
+void Snake::move(bool grow)
 {
   Vector2 newHead = body.front() + directions[static_cast<unsigned char>(direction)];
 
   if (newHead.x < 0 || newHead.x >= range.x || newHead.y < 0 || newHead.y >= range.y)
     newHead = (newHead + range) % range;
 
-  for (const Vector2 &segment : body)
-  {
-    // TODO: Complete this function to check for self-collision and game over
-    if (newHead == segment) return;
+  // TODO: Complete this function to check for self-collision and game over
+  if (checkCollision(newHead)) {
+    // Handle game over logic here (e.g., reset the game, display a message, etc.)
+    return;
   }
 
   body.insert(body.begin(), newHead);
-  body.pop_back();
+  if (!grow) body.pop_back();
 }
 
 void Snake::changeDirection(Direction newDir)
@@ -42,6 +42,18 @@ void Snake::changeDirection(Direction newDir)
     return;
 
   direction = newDir;
+}
+
+Vector2 Snake::getHead() const
+{
+  return body.front();
+}
+
+bool Snake::checkCollision(const Vector2& pos) const
+{
+  for (const Vector2 &segment : body)
+    if (segment == pos) return true;
+  return false;
 }
 
 void Snake::draw(SDL_Renderer* renderer)
