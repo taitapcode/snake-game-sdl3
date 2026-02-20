@@ -3,7 +3,7 @@
 Snake::Snake(int size, Vector2 range) : Entity(size, Vector2(range.x / 2, range.y / 2), range)
 {
   body.push_back(Vector2(range.x / 2, range.y / 2));
-  dir = Direction::RIGHT;
+  direction = Direction::RIGHT;
 }
 
 Snake::~Snake()
@@ -13,7 +13,7 @@ Snake::~Snake()
 
 void Snake::move()
 {
-  Vector2 newHead = body.front() + directions[static_cast<unsigned char>(dir)];
+  Vector2 newHead = body.front() + directions[static_cast<unsigned char>(direction)];
 
   if (newHead.x < 0 || newHead.x >= range.x || newHead.y < 0 || newHead.y >= range.y)
     newHead = (newHead + range) % range;
@@ -31,17 +31,17 @@ void Snake::move()
 void Snake::changeDirection(Direction newDir)
 {
   // Ignore if the new direction is the same as the current one
-  if (dir == newDir) return;
+  if (direction == newDir) return;
 
   // Prevent reversing direction if the snake has more than one segment
   if (body.size() > 1 &&
-      ((dir == Direction::UP && newDir == Direction::DOWN) ||
-       (dir == Direction::DOWN && newDir == Direction::UP) ||
-       (dir == Direction::LEFT && newDir == Direction::RIGHT) ||
-       (dir == Direction::RIGHT && newDir == Direction::LEFT)))
+      ((direction == Direction::UP && newDir == Direction::DOWN) ||
+       (direction == Direction::DOWN && newDir == Direction::UP) ||
+       (direction == Direction::LEFT && newDir == Direction::RIGHT) ||
+       (direction == Direction::RIGHT && newDir == Direction::LEFT)))
     return;
 
-  dir = newDir;
+  direction = newDir;
 }
 
 void Snake::draw(SDL_Renderer* renderer)

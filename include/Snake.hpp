@@ -30,5 +30,5 @@ private:
   };
 
   std::vector<Vector2> body;
-  Direction dir;
+  Direction direction;
 };
