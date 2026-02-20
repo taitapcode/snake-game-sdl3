@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
+#include "Vector2.hpp"
 #include "Grid.hpp"
 #include "Snake.hpp"
 #include "Food.hpp"
@@ -7,7 +8,7 @@
 class Game
 {
 public:
-  Game(const char *title, int gridSize, int columns, int rows);
+  Game(const char *title, int size, Vector2 range);
   ~Game();
 
   void run();

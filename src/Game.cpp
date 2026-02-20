@@ -1,15 +1,14 @@
 #include "Game.hpp"
 
-Game::Game(const char* title, int gridSize, int columns, int rows)
+Game::Game(const char* title, int size, Vector2 range)
 {
-  int width = columns * gridSize, height = rows * gridSize;
   isRunning = true;
   window = nullptr;
   renderer = nullptr;
 
-  snake = new Snake(gridSize, Vector2{columns, rows});
-  food = new Food(gridSize, Vector2{columns, rows});
-  grid = new Grid(gridSize, Vector2{columns, rows});
+  snake = new Snake(size, range);
+  food = new Food(size, range);
+  grid = new Grid(size, range);
 
   if (SDL_Init(SDL_INIT_VIDEO) == false)
   {
@@ -18,7 +17,7 @@ Game::Game(const char* title, int gridSize, int columns, int rows)
     return;
   }
 
-  window = SDL_CreateWindow(title, width, height, 0);
+  window = SDL_CreateWindow(title, range.x * size, range.y * size, 0);
   if (window == nullptr)
   {
     SDL_Log("Failed to create window: %s", SDL_GetError());

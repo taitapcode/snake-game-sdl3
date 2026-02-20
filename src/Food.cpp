@@ -21,12 +21,7 @@ void Food::random()
 
 void Food::draw(SDL_Renderer* renderer)
 {
-  SDL_FRect rect = {
-    pos.x * size * 1.0f,
-    pos.y * size * 1.0f,
-    size * 1.0f,
-    size * 1.0f
-  };
+  SDL_FRect rect{ pos.x * size * 1.0f, pos.y * size * 1.0f, size * 1.0f, size * 1.0f };
 
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderFillRect(renderer, &rect);
