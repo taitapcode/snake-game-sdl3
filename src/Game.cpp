@@ -94,8 +94,16 @@ void Game::update()
   if (grow)
   {
     do food->random();
-    while (snake->checkCollision(food->getPos()));
+    while (snake->checkBodyCollision(food->getPos()) && food->getPos() != snake->getHead());
   }
+
+  if (snake->checkBodyCollision(snake->getHead()))
+  {
+    isRunning = false;
+    SDL_Log("Game Over! Final Score: %d", snake->getScore());
+    return;
+  }
+
   snake->move(grow);
 }
 

@@ -20,7 +20,8 @@ public:
   void move(bool grow);
   void changeDirection(Direction newDir);
   Vector2 getHead() const;
-  bool checkCollision(const Vector2& pos) const;
+  bool checkBodyCollision(const Vector2& pos) const;
+  int getScore() const;
   void draw(SDL_Renderer* renderer) override;
 
 private:

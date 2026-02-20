@@ -18,12 +18,12 @@ private:
   SDL_Window* window;
   SDL_Renderer* renderer;
 
+  int tps;
+  Uint64 lastTickTime = 0;
+
   Grid* grid;
   Snake* snake;
   Food* food;
-
-  int tps;
-  Uint64 lastTickTime = 0;
 
   void processInput();
   void update();
