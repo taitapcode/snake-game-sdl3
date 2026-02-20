@@ -14,7 +14,7 @@ public:
   void run();
 
 private:
-  bool isRunning;
+  bool isRunning = true;
   SDL_Window* window;
   SDL_Renderer* renderer;
 

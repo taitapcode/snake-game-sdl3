@@ -2,10 +2,6 @@
 
 Game::Game(const char* title, int size, Vector2 range, int tps) : tps(tps)
 {
-  isRunning = true;
-  window = nullptr;
-  renderer = nullptr;
-
   snake = new Snake(size, range);
   food = new Food(size, range);
   grid = new Grid(size, range);
