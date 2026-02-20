@@ -61,20 +61,36 @@ void Game::processInput()
   SDL_Event event;
   while (SDL_PollEvent(&event))
   {
-    switch (event.type)
+    if (event.type == SDL_EVENT_QUIT)
     {
-      case SDL_EVENT_QUIT:
-        isRunning = false;
-        break;
+      isRunning = false;
+    }
+    else if (event.type == SDL_EVENT_KEY_DOWN)
+    {
+      switch (event.key.scancode)  {
+        case SDL_SCANCODE_UP:
+          snake->changeDirection(Direction::UP);
+          break;
+        case SDL_SCANCODE_DOWN:
+          snake->changeDirection(Direction::DOWN);
+          break;
+        case SDL_SCANCODE_LEFT:
+          snake->changeDirection(Direction::LEFT);
+          break;
+        case SDL_SCANCODE_RIGHT:
+          snake->changeDirection(Direction::RIGHT);
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
   }
 }
 
 void Game::update()
 {
+  snake->move();
 }
 
 void Game::render()

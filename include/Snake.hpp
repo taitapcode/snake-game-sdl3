@@ -3,15 +3,32 @@
 #include <vector>
 #include "Entity.hpp"
 
+enum class Direction : unsigned char
+{
+  UP = 0,
+  DOWN = 1,
+  LEFT = 2,
+  RIGHT = 3
+};
+
 class Snake : public Entity
 {
 public:
   Snake(int size, Vector2 range);
   ~Snake();
 
+  void move();
+  void changeDirection(Direction newDir);
   void draw(SDL_Renderer* renderer) override;
 
 private:
+  const std::vector<Vector2> directions = {
+    {0, -1},  // UP
+    {0, 1},   // DOWN
+    {-1, 0},  // LEFT
+    {1, 0}    // RIGHT
+  };
+
   std::vector<Vector2> body;
-  Vector2 direction;
+  Direction dir;
 };

@@ -8,7 +8,7 @@
 class Game
 {
 public:
-  Game(const char *title, int size, Vector2 range, int tps = 10);
+  Game(const char *title, int size, Vector2 range, int tps = 5);
   ~Game();
 
   void run();
