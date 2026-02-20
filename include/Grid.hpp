@@ -1,12 +1,11 @@
 #pragma once
 #include "Entity.hpp"
 
-class Food : public Entity
+class Grid : public Entity
 {
 public:
-  Food(int size, Vector2 range);
-  ~Food();
+  Grid(int size, Vector2 range);
+  ~Grid();
 
   void draw(SDL_Renderer* renderer) override;
-  void random();
 };

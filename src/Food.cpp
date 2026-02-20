@@ -1,29 +1,33 @@
 #include <random>
 #include "Food.hpp"
 
-Food::Food(int size, int colRange, int rowRange) : size(size), colRange(colRange), rowRange(rowRange), col(0), row(0)
+Food::Food(int size, Vector2 range) : Entity(size, Vector2(0, 0), range)
 {
-  randomizePosition();
+  random();
 }
 
 Food::~Food()
 {
 }
 
-void Food::randomizePosition()
+void Food::random()
 {
   static std::random_device rd;
   static std::mt19937 gen(rd());
-  std::uniform_int_distribution<> colDist(0, colRange - 1);
-  std::uniform_int_distribution<> rowDist(0, rowRange - 1);
+  std::uniform_int_distribution<> colDist(0, range.x - 1), rowDist(0, range.y - 1);
 
-  col = colDist(gen);
-  row = rowDist(gen);
+  pos = Vector2(colDist(gen), rowDist(gen));
 }
 
 void Food::draw(SDL_Renderer* renderer)
 {
-  SDL_FRect rect = { col * size * 1.0f, row * size * 1.0f, size * 1.0f, size * 1.0f };
+  SDL_FRect rect = {
+    pos.x * size * 1.0f,
+    pos.y * size * 1.0f,
+    size * 1.0f,
+    size * 1.0f
+  };
+
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderFillRect(renderer, &rect);
 }
