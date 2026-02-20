@@ -52,9 +52,9 @@ bool Snake::checkBodyCollision(const Vector2& pos) const
 
 void Snake::draw(SDL_Renderer* renderer)
 {
-  for(int i = 0; i < body.size(); i++)
+  for(Vector2& segment : body)
   {
-    SDL_FRect rect = { body[i].x * size * 1.0f, body[i].y * size * 1.0f, size * 1.0f, size * 1.0f };
+    SDL_FRect rect = { segment.x * size * 1.0f, segment.y * size * 1.0f, size * 1.0f, size * 1.0f };
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_RenderFillRect(renderer, &rect);
