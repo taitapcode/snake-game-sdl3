@@ -15,18 +15,6 @@ cmake --build build
 ./build/SnakeSDL3
 ```
 
-## Clean
-
-```bash
-rm -rf build
-```
-
-## Project Structure
-
-- `include/` - Header files
-- `src/` - Implementation files
-- `CMakeLists.txt` - Build configuration
-
 ## Requirements
 
 - C++11 or later
