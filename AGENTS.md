@@ -2,12 +2,11 @@
 
 This document provides coding standards and build instructions for agentic coding agents working on this C++ SDL3 Snake game project.
 
-## Build, Lint, and Test Commands
+## Build Commands
 
 ### Build
 ```bash
-cmake -S . -B build
-cmake --build build
+cmake -S . -B build && cmake --build build
 ```
 
 ### Run
@@ -17,16 +16,14 @@ cmake --build build
 
 ### Clean Build
 ```bash
-rm -rf build
-cmake -S . -B build
-cmake --build build
+rm -rf build && cmake -S . -B build && cmake --build build
 ```
 
-### Generate Compile Commands
-The project is configured to generate `compile_commands.json` for IDE integration:
-```bash
-cat build/compile_commands.json
-```
+### Note on Testing & Linting
+This project currently has no dedicated testing framework or linting configuration. Code quality is maintained through:
+- Manual code review during development
+- Adherence to the style guidelines in this document
+- Compiler warnings (enabled via CMake)
 
 ## Code Style Guidelines
 
