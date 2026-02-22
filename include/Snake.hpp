@@ -25,13 +25,7 @@ public:
   void draw(SDL_Renderer* renderer) override;
 
 private:
-  const std::vector<Vector2> directions = {
-    {0, -1},  // UP
-    {0, 1},   // DOWN
-    {-1, 0},  // LEFT
-    {1, 0}    // RIGHT
-  };
-
+  static const std::vector<Vector2> directions;
   std::vector<Vector2> body;
   Direction direction;
 };

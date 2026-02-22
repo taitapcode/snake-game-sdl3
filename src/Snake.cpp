@@ -1,5 +1,12 @@
 #include "Snake.hpp"
 
+const std::vector<Vector2> Snake::directions = {
+  {0, -1},  // UP
+  {0, 1},   // DOWN
+  {-1, 0},  // LEFT
+  {1, 0}    // RIGHT
+};
+
 Snake::Snake(int size, Vector2 range) : Entity(size, Vector2(range.x / 2, range.y / 2), range)
 {
   body.push_back(Vector2(range.x / 2, range.y / 2));
